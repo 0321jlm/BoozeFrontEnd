@@ -4,7 +4,7 @@ import ShowBooz from "./ShowBooz";
 import axios from "axios";
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
-  baseURL = "http://localhost:3003";
+  baseURL = "http://localhost:3000";
 }
 
 class BoozMain extends Component {
@@ -17,6 +17,7 @@ class BoozMain extends Component {
       starList: "",
       boozToShow: {},
       boozData: [],
+      boozComments: {},
       selectedBrewery: {}
     };
     this.getModel = this.getModel.bind(this);
@@ -51,8 +52,11 @@ class BoozMain extends Component {
   }
 
   async getBooz(boozobj) {
-    this.setState({ boozToShow: boozobj });
-    // console.log(boozobj);
+    this.setState({
+      boozToShow: boozobj.details,
+      boozComments: boozobj
+    });
+    console.log(boozobj);
   }
   async writeStars() {
     // this.setState({ boozToShow: rating });
@@ -147,7 +151,12 @@ class BoozMain extends Component {
             </tbody>
           </table>
         </section>
-        {this.state.boozToShow && <ShowBooz booz={this.state.boozToShow} />}
+        {this.state.boozToShow && (
+          <ShowBooz
+            booz={this.state.boozToShow}
+            booz2={this.state.boozComments}
+          />
+        )}
         {/* <section>{showEditForm}</section> */}
       </main>
     );
