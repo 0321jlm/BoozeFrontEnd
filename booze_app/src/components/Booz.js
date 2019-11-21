@@ -14,6 +14,7 @@ class BoozMain extends Component {
       stars: 0,
       deleteButton: false,
       editButton: false,
+      starList: "",
       boozToShow: {},
       boozData: [],
       selectedBrewery: {}
@@ -22,6 +23,7 @@ class BoozMain extends Component {
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.getBooz = this.getBooz.bind(this);
+    this.writeStars = this.writeStars.bind(this);
   }
   componentDidMount() {
     // console.log("Booz Form Mounted in componentDidMount");
@@ -52,9 +54,44 @@ class BoozMain extends Component {
     this.setState({ boozToShow: boozobj });
     // console.log(boozobj);
   }
+  async writeStars() {
+    // this.setState({ boozToShow: rating });
+    console.log("writeStars => ");
+    return "fffffff";
+  }
   async getModel(bookmarkID) {
     const response = await axios.get(`${baseURL}`);
     const data = response.data;
+
+    let i = 0;
+    for (i = 0; i < data.length; i++) {
+      console.log("data.rating", data[i].rating);
+      if (data[i].rating === 1) {
+        data[i].star1 = "X";
+      }
+      if (data[i].rating === 2) {
+        data[i].star1 = "X";
+        data[i].star2 = "X";
+      }
+      if (data[i].rating === 3) {
+        data[i].star1 = "X";
+        data[i].star2 = "X";
+        data[i].star3 = "X";
+      }
+      if (data[i].rating === 4) {
+        data[i].star1 = "X";
+        data[i].star2 = "X";
+        data[i].star3 = "X";
+        data[i].star4 = "X";
+      }
+      if (data[i].rating === 5) {
+        data[i].star1 = "X";
+        data[i].star2 = "X";
+        data[i].star3 = "X";
+        data[i].star4 = "X";
+        data[i].star5 = "X";
+      }
+    }
 
     this.setState({
       boozData: data
@@ -79,12 +116,13 @@ class BoozMain extends Component {
                 return (
                   <tr key={boozd._id} onMouseOver={() => this.getBooz(boozd)}>
                     <td>{boozd.details.name}</td>
-                    <td>rating {boozd.rating}</td>
-                    <td>*</td>
-                    <td>*</td>
-                    <td>*</td>
-                    <td>*</td>
-                    <td>*</td>
+
+                    <td>{boozd.star1}</td>
+                    <td>{boozd.star2}</td>
+                    <td>{boozd.star3}</td>
+                    <td>{boozd.star4}</td>
+                    <td>{boozd.star5}</td>
+
                     <td>
                       <button onClick={() => this.handleEditButton(boozd)}>
                         Edit
