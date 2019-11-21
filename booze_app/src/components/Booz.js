@@ -1,0 +1,166 @@
+import React, { Component } from "react";
+// import CreateForm from "./CreateForm";
+import ShowBooz from "./ShowBooz";
+import axios from "axios";
+let baseURL = process.env.REACT_APP_BASEURL;
+if (process.env.NODE_ENV === "development") {
+  baseURL = "http://localhost:3000";
+}
+
+class BoozMain extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stars: 0,
+      deleteButton: false,
+      editButton: false,
+      starList: "",
+      boozToShow: {},
+      boozData: [],
+      boozComments: {},
+      selectedBrewery: {}
+    };
+    this.getModel = this.getModel.bind(this);
+    this.handleEditButton = this.handleEditButton.bind(this);
+    this.handleDeleteButton = this.handleDeleteButton.bind(this);
+    this.getBooz = this.getBooz.bind(this);
+    this.writeStars = this.writeStars.bind(this);
+  }
+  componentDidMount() {
+    // console.log("Booz Form Mounted in componentDidMount");
+    this.getModel();
+  }
+
+  async handleEditButton(clickedBookmark) {
+    console.log("Clicked Edit Button");
+    // await this.setState({
+    //   editButton: true,
+    //   selectedBookmark: clickedBookmark
+    // });
+    // console.log("Current Bookmark: ", this.state.selectedBookmark);
+  }
+
+  async handleDeleteButton(id) {
+    try {
+      const url = `${baseURL}/booz/${id}`;
+
+      console.log("Clicked Delete Button url", url);
+      await axios.delete(url);
+    } catch (err) {
+      console.log("DELETE Error: ", err);
+    }
+  }
+
+  async getBooz(boozobj) {
+    this.setState({
+      boozToShow: boozobj.details,
+      boozComments: boozobj
+    });
+    console.log(boozobj);
+  }
+  async writeStars() {
+    // this.setState({ boozToShow: rating });
+    console.log("writeStars => ");
+    return "fffffff";
+  }
+  async getModel(bookmarkID) {
+    const response = await axios.get(`${baseURL}`);
+    const data = response.data;
+
+    let i = 0;
+    for (i = 0; i < data.length; i++) {
+      console.log("data.rating", data[i].rating);
+      if (data[i].rating === 1) {
+        data[i].star1 = "X";
+      }
+      if (data[i].rating === 2) {
+        data[i].star1 = "X";
+        data[i].star2 = "X";
+      }
+      if (data[i].rating === 3) {
+        data[i].star1 = "X";
+        data[i].star2 = "X";
+        data[i].star3 = "X";
+      }
+      if (data[i].rating === 4) {
+        data[i].star1 = "X";
+        data[i].star2 = "X";
+        data[i].star3 = "X";
+        data[i].star4 = "X";
+      }
+      if (data[i].rating === 5) {
+        data[i].star1 = "X";
+        data[i].star2 = "X";
+        data[i].star3 = "X";
+        data[i].star4 = "X";
+        data[i].star5 = "X";
+      }
+    }
+
+    this.setState({
+      boozData: data
+    });
+  }
+
+  render() {
+    // const { allBookmarks, getBookmarks } = this.props;
+    // const { editButton, selectedBookmark } = this.state;
+    // const showEditForm = editButton ? (
+    //   <EditForm bookmark={selectedBookmark} getBookmarks={getBookmarks} />
+    // ) : (
+    //   <CreateForm getBookmarks={getBookmarks} />
+    // );
+    return (
+      <main>
+        <h1>Booz header 2</h1>
+        <section>
+          <table>
+            <tbody>
+              {this.state.boozData.map(boozd => {
+                return (
+                  <tr key={boozd._id} onMouseOver={() => this.getBooz(boozd)}>
+                    <td>{boozd.details.name}</td>
+
+                    <td>{boozd.star1}</td>
+                    <td>{boozd.star2}</td>
+                    <td>{boozd.star3}</td>
+                    <td>{boozd.star4}</td>
+                    <td>{boozd.star5}</td>
+
+                    <td>
+                      <button onClick={() => this.handleEditButton(boozd)}>
+                        Edit
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => this.handleDeleteButton(boozd._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+
+                  //     <td>
+                  //       <button onClick={() => this.handleEditButton(bookmark)}>
+                  //         Edit
+                  //       </button>
+                  //     </td>
+                );
+              })}
+            </tbody>
+          </table>
+        </section>
+        {this.state.boozToShow && (
+          <ShowBooz
+            booz={this.state.boozToShow}
+            booz2={this.state.boozComments}
+          />
+        )}
+        {/* <section>{showEditForm}</section> */}
+      </main>
+    );
+  }
+}
+
+export default BoozMain;
