@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import CreateForm from "./CreateForm";
-// import EditForm from "./EditForm";
+import ShowBooz from "./ShowBooz";
 import axios from "axios";
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
@@ -14,6 +14,7 @@ class BoozMain extends Component {
       stars: 0,
       deleteButton: false,
       editButton: false,
+      boozToShow: {},
       boozData: [],
       selectedBrewery: {}
     };
@@ -38,7 +39,7 @@ class BoozMain extends Component {
 
   async handleDeleteButton(id) {
     try {
-      const url = `${baseURL}/${id}`;
+      const url = `${baseURL}/booz/${id}`;
 
       console.log("Clicked Delete Button url", url);
       await axios.delete(url);
@@ -52,15 +53,12 @@ class BoozMain extends Component {
     // console.log(boozobj);
   }
   async getModel(bookmarkID) {
-    // const url = `http://localhost:3003/`;
     const response = await axios.get(`${baseURL}`);
     const data = response.data;
-    // console.log("data f", data[0].rating);
+
     this.setState({
       boozData: data
     });
-
-    // console.log("get Error: ", err);
   }
 
   render() {
@@ -79,10 +77,14 @@ class BoozMain extends Component {
             <tbody>
               {this.state.boozData.map(boozd => {
                 return (
-                  //   <p key={boozd._id}>fred {boozd._id}></p>
                   <tr key={boozd._id} onMouseOver={() => this.getBooz(boozd)}>
                     <td>{boozd.details.name}</td>
                     <td>rating {boozd.rating}</td>
+                    <td>*</td>
+                    <td>*</td>
+                    <td>*</td>
+                    <td>*</td>
+                    <td>*</td>
                     <td>
                       <button onClick={() => this.handleEditButton(boozd)}>
                         Edit
@@ -107,12 +109,7 @@ class BoozMain extends Component {
             </tbody>
           </table>
         </section>
-        {/* {this.state.boozToShow && (
-          <ShowBooz
-
-            booz={this.state.boozToShow}
-          />
-        )} */}
+        {this.state.boozToShow && <ShowBooz booz={this.state.boozToShow} />}
         {/* <section>{showEditForm}</section> */}
       </main>
     );
