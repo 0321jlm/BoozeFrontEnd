@@ -21,7 +21,9 @@ class UpdateBooz extends Component {
     });
   }
 
+
   async handleChange(event) {
+
     const { name, value } = event.target;
     this.setState({
       [name]: value
@@ -29,7 +31,7 @@ class UpdateBooz extends Component {
   }
 
   async handleSubmit(event) {
-    console.log("frefred");
+
     try {
       event.preventDefault();
       const boozID = this.props.booz._id;
@@ -49,6 +51,7 @@ class UpdateBooz extends Component {
     } catch (err) {
       console.log("Update Submit Error: ", err);
     }
+
   }
 
   render() {
@@ -61,15 +64,21 @@ class UpdateBooz extends Component {
             <input
               type="number"
               name="rating"
+
               onChange={this.handleChange}
+
               value={this.state.rating}
+
+
             />
             <label htmlFor="comments">Comments:</label>
             <input
               type="text"
               name="comments"
               onChange={this.handleChange}
+
               value={this.state.comments}
+
             />
             <input type="submit" value="Update Booz" />
           </div>

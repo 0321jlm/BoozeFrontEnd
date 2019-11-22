@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import CreateForm from "./CreateForm";
 import ShowBooz from "./ShowBooz";
 import UpdateBooz from "./UpdateBooz";
+import NewBooz from "./NewBooz.js";
 import axios from "axios";
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
@@ -19,7 +20,9 @@ class Booz extends Component {
       boozToShow: {},
       boozData: [],
       boozComments: {},
-      selectedBrewery: {}
+      selectedBrewery: {},
+      baseURL: "",
+      firstRow: []
     };
     this.getModel = this.getModel.bind(this);
     this.handleEditButton = this.handleEditButton.bind(this);
@@ -27,13 +30,15 @@ class Booz extends Component {
     this.getBooz = this.getBooz.bind(this);
   }
   componentDidMount() {
-    // console.log("Booz Form Mounted in componentDidMount");
     this.getModel();
-    // console.log("in did mount data boozData = ", this.state.boozData[0]);
+    // console.log("in Did mounbt", boozData);
+    // this.getBooz();
   }
 
   async handleEditButton(clickedBrewery) {
-    console.log("Clicked Edit Button", clickedBrewery);
+
+
+
     await this.setState({
       editButton: true,
       selectedBrewery: clickedBrewery
@@ -43,6 +48,7 @@ class Booz extends Component {
   async handleDeleteButton(id) {
     try {
       const url = `${baseURL}/booz/${id}`;
+      console.log("In delete url", url);
       await axios.delete(url);
     } catch (err) {
       console.log("DELETE Error: ", err);
@@ -60,7 +66,8 @@ class Booz extends Component {
     const response = await axios.get(`${baseURL}`);
     console.log("data", response.data);
     const data = response.data;
-
+    // firstRow = data[0];
+    // console.log("in getMOdel", data[0]);
     let i = 0;
     for (i = 0; i < data.length; i++) {
       if (data[i].rating === 1) {
@@ -96,49 +103,102 @@ class Booz extends Component {
   }
 
   render() {
-    // const { allBookmarks, getBookmarks } = this.props;
-    // const { editButton, selectedBookmark } = this.state;
+    const { baseURL } = this.props;
     const showEditForm = this.state.editButton ? (
-      <UpdateBooz booz={this.state.selectedBrewery} />
+
+
+      <UpdateBooz booz={this.state.selectedBrewery} getModel={this.getModel} />
+
     ) : (
       <ShowBooz booz={this.state.boozToShow} booz2={this.state.boozComments} />
     );
     return (
       <main>
         <h1>Favorite Breweries</h1>
-        <section>
-          <table>
-            <tbody>
-              {this.state.boozData.map(boozd => {
-                return (
-                  <tr key={boozd._id} onMouseOver={() => this.getBooz(boozd)}>
-                    <td>{boozd.details.name}</td>
 
-                    <td>{boozd.star1}</td>
-                    <td>{boozd.star2}</td>
-                    <td>{boozd.star3}</td>
-                    <td>{boozd.star4}</td>
-                    <td>{boozd.star5}</td>
-
-                    <td>
-                      <button onClick={() => this.handleEditButton(boozd)}>
-                        Edit
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => this.handleDeleteButton(boozd._id)}
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <table>
+                <tbody>
+                  {this.state.boozData.map(boozd => {
+                    return (
+                      <tr
+                        key={boozd._id}
+                        onMouseOver={() => this.getBooz(boozd)}
                       >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-        {<section>{showEditForm}</section>}
+
+                        <td>{boozd.details.name}</td>
+                        <td align="left">
+                          {boozd.star1 === "X" && (
+                            <img
+                              src="/star.png"
+                              alt="x"
+                              width="25"
+                              height="18"
+                            />
+                          )}
+                          {boozd.star2 === "X" && (
+                            <img
+                              src="/star.png"
+                              alt="x"
+                              width="25"
+                              height="18"
+                            />
+                          )}
+                          {boozd.star3 === "X" && (
+                            <img
+                              src="/star.png"
+                              alt="x"
+                              width="25"
+                              height="18"
+                            />
+                          )}
+                          {boozd.star4 === "X" && (
+                            <img
+                              src="/star.png"
+                              alt="x"
+                              width="25"
+                              height="18"
+                            />
+                          )}
+                          {boozd.star5 === "X" && (
+                            <img
+                              src="/star.png"
+                              alt="x"
+                              width="25"
+                              height="18"
+                            />
+                          )}
+                        </td>
+
+                        <td>
+                          <button onClick={() => this.handleEditButton(boozd)}>
+                            Edit
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => this.handleDeleteButton(boozd._id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div className="col-sm">
+              <section>{showEditForm}</section>
+            </div>
+          </div>
+          <div className="row">
+            <NewBooz handleNewBooz={this.handleNewBooz} />
+          </div>
+        </div>
+
       </main>
     );
   }
