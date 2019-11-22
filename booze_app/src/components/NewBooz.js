@@ -16,8 +16,7 @@ class NewBooz extends React.Component {
   }
 
   componentDidMount() {
-    // console.log("Edit Form Mounted");
-    // console.log("this props booz: ", this.props.booz);
+    console.log("Edit Form Mounted");
   }
 
   async callApi() {
