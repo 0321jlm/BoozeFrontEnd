@@ -1,13 +1,6 @@
 import React from "react";
 import axios from "axios";
-
 let baseURL = process.env.REACT_APP_BASEURL;
-
-if (process.env.NODE_ENV === "development") {
-  baseURL = "http://localhost:3000";
-} else {
-  baseURL = "https://fathomless-sierra-68956.herokuapp.com";
-}
 
 class NewBooz extends React.Component {
   constructor(props) {
@@ -58,7 +51,7 @@ class NewBooz extends React.Component {
                 <tr key={aBooz.id}>
                   <td>{aBooz.name}</td>
                   <td>{aBooz.website_url}</td>
-                  <td onClick={() => this.props.handleNewBooz({ aBooz })}>X</td>
+                  <td onClick={() => this.props.handleNewBooz(aBooz)}>X</td>
                 </tr>
               );
             })}
