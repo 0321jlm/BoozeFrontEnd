@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === "development") {
   baseURL = "http://localhost:3000";
 }
 
-class BoozMain extends Component {
+class Booz extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,11 +24,11 @@ class BoozMain extends Component {
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.getBooz = this.getBooz.bind(this);
-    this.writeStars = this.writeStars.bind(this);
   }
   componentDidMount() {
     // console.log("Booz Form Mounted in componentDidMount");
     this.getModel();
+    // console.log("in did mount data boozData = ", this.state.boozData[0]);
   }
 
   async handleEditButton(clickedBookmark) {
@@ -37,14 +37,13 @@ class BoozMain extends Component {
     //   editButton: true,
     //   selectedBookmark: clickedBookmark
     // });
-    // console.log("Current Bookmark: ", this.state.selectedBookmark);
   }
 
   async handleDeleteButton(id) {
     try {
       const url = `${baseURL}/booz/${id}`;
 
-      console.log("Clicked Delete Button url", url);
+      // console.log("Clicked Delete Button url", url);
       await axios.delete(url);
     } catch (err) {
       console.log("DELETE Error: ", err);
@@ -56,20 +55,15 @@ class BoozMain extends Component {
       boozToShow: boozobj.details,
       boozComments: boozobj
     });
-    console.log(boozobj);
   }
-  async writeStars() {
-    // this.setState({ boozToShow: rating });
-    console.log("writeStars => ");
-    return "fffffff";
-  }
+
   async getModel(bookmarkID) {
     const response = await axios.get(`${baseURL}`);
     const data = response.data;
 
     let i = 0;
     for (i = 0; i < data.length; i++) {
-      console.log("data.rating", data[i].rating);
+      // console.log("data.rating", data[i].rating);
       if (data[i].rating === 1) {
         data[i].star1 = "X";
       }
@@ -112,7 +106,7 @@ class BoozMain extends Component {
     // );
     return (
       <main>
-        <h1>Booz header 2</h1>
+        <h1>Favorite Breweries</h1>
         <section>
           <table>
             <tbody>
@@ -140,27 +134,23 @@ class BoozMain extends Component {
                       </button>
                     </td>
                   </tr>
-
-                  //     <td>
-                  //       <button onClick={() => this.handleEditButton(bookmark)}>
-                  //         Edit
-                  //       </button>
-                  //     </td>
                 );
               })}
             </tbody>
           </table>
         </section>
-        {this.state.boozToShow && (
-          <ShowBooz
-            booz={this.state.boozToShow}
-            booz2={this.state.boozComments}
-          />
-        )}
+        <section>
+          {this.state.boozToShow && (
+            <ShowBooz
+              booz={this.state.boozToShow}
+              booz2={this.state.boozComments}
+            />
+          )}
+        </section>
         {/* <section>{showEditForm}</section> */}
       </main>
     );
   }
 }
 
-export default BoozMain;
+export default Booz;
