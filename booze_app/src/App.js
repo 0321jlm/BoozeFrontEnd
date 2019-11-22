@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "../src/index.css";
 
 import Booz from "./components/Booz.js";
-import NewBooz from "./components/NewBooz.js";
+// import NewBooz from "./components/NewBooz.js";
 
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
@@ -52,7 +53,7 @@ class App extends React.Component {
       <div className="App">
         <h1>BOOZ HEADER</h1>
         <Booz />
-        <NewBooz handleNewBooz={this.handleNewBooz} />
+        {/* <NewBooz handleNewBooz={this.handleNewBooz} /> */}
       </div>
     );
   }
