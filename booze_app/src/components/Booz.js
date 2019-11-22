@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import CreateForm from "./CreateForm";
 import ShowBooz from "./ShowBooz";
 import UpdateBooz from "./UpdateBooz";
 import NewBooz from "./NewBooz.js";
@@ -22,7 +21,7 @@ class Booz extends Component {
       boozComments: {},
       selectedBrewery: {},
       baseURL: "",
-      firstRow: []
+      firstRow: {}
     };
     this.getModel = this.getModel.bind(this);
     this.handleEditButton = this.handleEditButton.bind(this);
@@ -31,8 +30,8 @@ class Booz extends Component {
   }
   componentDidMount() {
     this.getModel();
-    // console.log("in Did mounbt", boozData);
-    // this.getBooz();
+    // console.log("in Did mounbt", this.state.firstRow);
+    // this.getBooz(this.state.firstRow);
   }
 
   async handleEditButton(clickedBrewery) {
@@ -63,8 +62,8 @@ class Booz extends Component {
   async getModel(bookmarkID) {
     const response = await axios.get(`${baseURL}`);
     const data = response.data;
-    // firstRow = data[0];
-    // console.log("in getMOdel", data[0]);
+
+    // console.log("in getMOdel", data[0].details);
     let i = 0;
     for (i = 0; i < data.length; i++) {
       if (data[i].rating === 1) {
@@ -94,9 +93,15 @@ class Booz extends Component {
       }
     }
 
+    let firstRow1 = data[0];
+    console.log("in get model firstRow", firstRow1);
+
     this.setState({
-      boozData: data
+      boozData: data,
+      editButton: false
     });
+
+    this.getBooz(firstRow1);
   }
 
   render() {
@@ -112,7 +117,7 @@ class Booz extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="col-sm">
+            <div className="col-md">
               <table>
                 <tbody>
                   {this.state.boozData.map(boozd => {
@@ -183,7 +188,7 @@ class Booz extends Component {
                 </tbody>
               </table>
             </div>
-            <div className="col-sm">
+            <div className="col-md">
               <section>{showEditForm}</section>
             </div>
           </div>
