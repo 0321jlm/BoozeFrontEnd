@@ -27,6 +27,7 @@ class Booz extends Component {
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.getBooz = this.getBooz.bind(this);
+    this.handleNewBooz = this.handleNewBooz.bind(this);
   }
   componentDidMount() {
     this.getModel();
@@ -100,6 +101,25 @@ class Booz extends Component {
     this.getBooz(firstRow1);
   }
 
+  async handleNewBooz(aBooz) {
+    console.log("new", aBooz);
+    const addBooz = {
+      rating: "",
+      comments: "",
+      details: aBooz
+    };
+
+    console.log("handle new booz entered: ", addBooz);
+    // event.preventDefault();
+    console.log("baseURL: ", baseURL);
+    const response = await axios.post(`${baseURL}/booz`, addBooz);
+    this.setState({
+      details: aBooz,
+      rating: "",
+      comments: ""
+    });
+    // console.log("this state: ", this.state);
+  }
   render() {
     const { baseURL } = this.props;
     const showEditForm = this.state.editButton ? (
@@ -189,7 +209,10 @@ class Booz extends Component {
             </div>
           </div>
           <div className="row">
-            <NewBooz handleNewBooz={this.handleNewBooz} />
+            <NewBooz
+              handleNewBooz={this.handleNewBooz}
+              getModel={this.getModel}
+            />
           </div>
         </div>
       </main>
