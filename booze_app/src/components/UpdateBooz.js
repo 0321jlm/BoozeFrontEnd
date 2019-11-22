@@ -1,15 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
-class UpdateBooz extends React.Component {
+class UpdateBooz extends Component {
   constuctor() {
-    super();
+    // super();
     this.state = {
       rating: 0,
       comments: ""
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
-    this handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -19,8 +19,8 @@ class UpdateBooz extends React.Component {
     });
   }
 
-  handleChange(event) {
-    const {name, value} = event.target
+  asynchandleChange(event) {
+    const { name, value } = event.target;
     this.setState({
       [name]: value
     });
@@ -34,16 +34,15 @@ class UpdateBooz extends React.Component {
       const payload = {
         rating: this.state.rating,
         comments: this.state.comments
-      }
+      };
       const updatedBooz = await axios.put(url, payload);
       this.props.getBooz();
       this.setState({
         rating: {},
-        comments: ''
-
-      }) catch (err){
-        console.log('Update Submit Error: ', err);
-      }
+        comments: ""
+      });
+    } catch (err) {
+      console.log("Update Submit Error: ", err);
     }
   }
 
@@ -57,17 +56,15 @@ class UpdateBooz extends React.Component {
             <input
               type="number"
               name="rating"
-              id="rating"
-              OnChange={this.handleChange}
-              value={this.state.rating}
+              onChange={this.handleChange}
+              value={this.props.booz.rating}
             />
             <label htmlFor="comments">Comments:</label>
             <input
               type="text"
               name="comments"
-              id="comments"
               onChange={this.handleChange}
-              value={this.state.comments}
+              value={this.props.booz.comments}
             />
             <input type="submit" value="Update Booz" />
           </div>
@@ -76,3 +73,5 @@ class UpdateBooz extends React.Component {
     );
   }
 }
+
+export default UpdateBooz;
