@@ -1,15 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
-class UpdateBooz extends React.Component {
+class UpdateBooz extends Component {
   constuctor() {
-    super();
+    // super();
     this.state = {
       rating: 0,
       comments: ""
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
-    this handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -20,31 +20,31 @@ class UpdateBooz extends React.Component {
   }
 
   handleChange(event) {
-    const {name, value} = event.target
+    const { name, value } = event.target;
     this.setState({
       [name]: value
     });
   }
 
   async handleSubmit(event) {
-    try {
-      event.preventDefault();
-      const boozID = this.props.booz._id;
-      const url = `http://localhost:3003/booz/${boozID}`;
-      const payload = {
-        rating: this.state.rating,
-        comments: this.state.comments
-      }
-      const updatedBooz = await axios.put(url, payload);
-      this.props.getBooz();
-      this.setState({
-        rating: {},
-        comments: ''
-
-      }) catch (err){
-        console.log('Update Submit Error: ', err);
-      }
-    }
+    // try {
+    //   event.preventDefault();
+    //   const boozID = this.props.booz._id;
+    //   const url = `http://localhost:3003/booz/${boozID}`;
+    //   const payload = {
+    //     rating: this.state.rating,
+    //     comments: this.state.comments
+    //   }
+    //   const updatedBooz = await axios.put(url, payload);
+    //   this.props.getBooz();
+    //   this.setState({
+    //     rating: {},
+    //     comments: ''
+    //   }
+    //   ) catch (err){
+    //     console.log('Update Submit Error: ', err);
+    //   }
+    // }
   }
 
   render() {
@@ -59,7 +59,7 @@ class UpdateBooz extends React.Component {
               name="rating"
               id="rating"
               OnChange={this.handleChange}
-              value={this.state.rating}
+              // value={this.state.rating}
             />
             <label htmlFor="comments">Comments:</label>
             <input
@@ -67,7 +67,7 @@ class UpdateBooz extends React.Component {
               name="comments"
               id="comments"
               onChange={this.handleChange}
-              value={this.state.comments}
+              // value={this.state.comments}
             />
             <input type="submit" value="Update Booz" />
           </div>
@@ -76,3 +76,5 @@ class UpdateBooz extends React.Component {
     );
   }
 }
+
+export default UpdateBooz;
