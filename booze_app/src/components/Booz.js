@@ -5,7 +5,7 @@ import UpdateBooz from "./UpdateBooz";
 import axios from "axios";
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
-  baseURL = "http://localhost:3003";
+  baseURL = "http://localhost:3000";
 }
 
 class Booz extends Component {
@@ -33,7 +33,7 @@ class Booz extends Component {
   }
 
   async handleEditButton(clickedBrewery) {
-    console.log("Clicked Edit Button");
+    console.log("Clicked Edit Button", clickedBrewery);
     await this.setState({
       editButton: true,
       selectedBrewery: clickedBrewery
@@ -58,6 +58,7 @@ class Booz extends Component {
 
   async getModel(bookmarkID) {
     const response = await axios.get(`${baseURL}`);
+    console.log("data", response.data);
     const data = response.data;
 
     let i = 0;
@@ -98,10 +99,7 @@ class Booz extends Component {
     // const { allBookmarks, getBookmarks } = this.props;
     // const { editButton, selectedBookmark } = this.state;
     const showEditForm = this.state.editButton ? (
-      <UpdateBooz
-        booz={this.state.selectedBrewery}
-        booz2={this.state.boozComments}
-      />
+      <UpdateBooz booz={this.state.selectedBrewery} />
     ) : (
       <ShowBooz booz={this.state.boozToShow} booz2={this.state.boozComments} />
     );
@@ -140,19 +138,7 @@ class Booz extends Component {
             </tbody>
           </table>
         </section>
-        <section>
-          {/* {this.state.boozToShow && (
-            <ShowBooz
-              booz={this.state.boozToShow}
-              booz2={this.state.boozComments}
-            />
-          )} */}
-          <UpdateBooz
-            booz={this.state.selectedBrewery}
-            // booz2={this.state.boozComments}
-          />
-        </section>
-        {/* <section>{showEditForm}</section> */}
+        {<section>{showEditForm}</section>}
       </main>
     );
   }
