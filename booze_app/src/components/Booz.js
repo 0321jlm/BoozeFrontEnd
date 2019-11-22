@@ -36,9 +36,6 @@ class Booz extends Component {
   }
 
   async handleEditButton(clickedBrewery) {
-
-
-
     await this.setState({
       editButton: true,
       selectedBrewery: clickedBrewery
@@ -98,17 +95,15 @@ class Booz extends Component {
     }
 
     this.setState({
-      boozData: data
+      boozData: data,
+      editButton: false
     });
   }
 
   render() {
     const { baseURL } = this.props;
     const showEditForm = this.state.editButton ? (
-
-
       <UpdateBooz booz={this.state.selectedBrewery} getModel={this.getModel} />
-
     ) : (
       <ShowBooz booz={this.state.boozToShow} booz2={this.state.boozComments} />
     );
@@ -127,7 +122,6 @@ class Booz extends Component {
                         key={boozd._id}
                         onMouseOver={() => this.getBooz(boozd)}
                       >
-
                         <td>{boozd.details.name}</td>
                         <td align="left">
                           {boozd.star1 === "X" && (
@@ -198,7 +192,6 @@ class Booz extends Component {
             <NewBooz handleNewBooz={this.handleNewBooz} />
           </div>
         </div>
-
       </main>
     );
   }
