@@ -6,7 +6,7 @@ import NewBooz from "./NewBooz.js";
 import axios from "axios";
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
-  baseURL = "http://localhost:3003";
+  baseURL = "http://localhost:3000";
 }
 
 class Booz extends Component {
@@ -36,7 +36,9 @@ class Booz extends Component {
   }
 
   async handleEditButton(clickedBrewery) {
-    // console.log("Clicked Edit Button");
+
+
+
     await this.setState({
       editButton: true,
       selectedBrewery: clickedBrewery
@@ -62,6 +64,7 @@ class Booz extends Component {
 
   async getModel(bookmarkID) {
     const response = await axios.get(`${baseURL}`);
+    console.log("data", response.data);
     const data = response.data;
     // firstRow = data[0];
     // console.log("in getMOdel", data[0]);
@@ -102,7 +105,10 @@ class Booz extends Component {
   render() {
     const { baseURL } = this.props;
     const showEditForm = this.state.editButton ? (
+
+
       <UpdateBooz booz={this.state.selectedBrewery} getModel={this.getModel} />
+
     ) : (
       <ShowBooz booz={this.state.boozToShow} booz2={this.state.boozComments} />
     );
@@ -121,6 +127,7 @@ class Booz extends Component {
                         key={boozd._id}
                         onMouseOver={() => this.getBooz(boozd)}
                       >
+
                         <td>{boozd.details.name}</td>
                         <td align="left">
                           {boozd.star1 === "X" && (
@@ -191,6 +198,7 @@ class Booz extends Component {
             <NewBooz handleNewBooz={this.handleNewBooz} />
           </div>
         </div>
+
       </main>
     );
   }

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class UpdateBooz extends Component {
-  constuctor() {
-    // super();
+  constructor() {
+    super();
     this.state = {
-      rating: 0,
+      rating: {},
       comments: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -13,6 +13,8 @@ class UpdateBooz extends Component {
   }
 
   componentDidMount() {
+    console.log("mounted", this.props);
+
     this.setState({
       rating: this.props.booz.rating,
       comments: this.props.booz.comments
@@ -20,7 +22,7 @@ class UpdateBooz extends Component {
   }
 
 
-  asynchandleChange(event) {
+  async handleChange(event) {
 
     const { name, value } = event.target;
     this.setState({
@@ -33,13 +35,15 @@ class UpdateBooz extends Component {
     try {
       event.preventDefault();
       const boozID = this.props.booz._id;
-      const url = `http://localhost:3003/booz/${boozID}`;
+      const url = `http://localhost:3000/booz/${boozID}`;
       const payload = {
         rating: this.state.rating,
         comments: this.state.comments
       };
+      console.log("in handle submit", url, "Payload", payload);
+
       const updatedBooz = await axios.put(url, payload);
-      this.props.getBooz();
+      this.props.getModal();
       this.setState({
         rating: {},
         comments: ""
@@ -54,7 +58,7 @@ class UpdateBooz extends Component {
     return (
       <div>
         <h1>Update Info</h1>
-        <form onSubmit={() => this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="rating">Rating:</label>
             <input
@@ -62,7 +66,9 @@ class UpdateBooz extends Component {
               name="rating"
 
               onChange={this.handleChange}
-              value={this.props.booz.rating}
+
+              value={this.state.rating}
+
 
             />
             <label htmlFor="comments">Comments:</label>
@@ -71,7 +77,8 @@ class UpdateBooz extends Component {
               name="comments"
               onChange={this.handleChange}
 
-              value={this.props.booz.comments}
+              value={this.state.comments}
+
             />
             <input type="submit" value="Update Booz" />
           </div>
