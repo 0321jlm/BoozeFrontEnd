@@ -19,7 +19,9 @@ class UpdateBooz extends Component {
     });
   }
 
-  handleChange(event) {
+
+  asynchandleChange(event) {
+
     const { name, value } = event.target;
     this.setState({
       [name]: value
@@ -27,24 +29,25 @@ class UpdateBooz extends Component {
   }
 
   async handleSubmit(event) {
-    // try {
-    //   event.preventDefault();
-    //   const boozID = this.props.booz._id;
-    //   const url = `http://localhost:3003/booz/${boozID}`;
-    //   const payload = {
-    //     rating: this.state.rating,
-    //     comments: this.state.comments
-    //   }
-    //   const updatedBooz = await axios.put(url, payload);
-    //   this.props.getBooz();
-    //   this.setState({
-    //     rating: {},
-    //     comments: ''
-    //   }
-    //   ) catch (err){
-    //     console.log('Update Submit Error: ', err);
-    //   }
-    // }
+
+    try {
+      event.preventDefault();
+      const boozID = this.props.booz._id;
+      const url = `http://localhost:3003/booz/${boozID}`;
+      const payload = {
+        rating: this.state.rating,
+        comments: this.state.comments
+      };
+      const updatedBooz = await axios.put(url, payload);
+      this.props.getBooz();
+      this.setState({
+        rating: {},
+        comments: ""
+      });
+    } catch (err) {
+      console.log("Update Submit Error: ", err);
+    }
+
   }
 
   render() {
@@ -57,17 +60,18 @@ class UpdateBooz extends Component {
             <input
               type="number"
               name="rating"
-              id="rating"
-              OnChange={this.handleChange}
-              // value={this.state.rating}
+
+              onChange={this.handleChange}
+              value={this.props.booz.rating}
+
             />
             <label htmlFor="comments">Comments:</label>
             <input
               type="text"
               name="comments"
-              id="comments"
               onChange={this.handleChange}
-              // value={this.state.comments}
+
+              value={this.props.booz.comments}
             />
             <input type="submit" value="Update Booz" />
           </div>
