@@ -5,18 +5,16 @@ import React from "react";
 import "./App.css";
 import "../src/index.css";
 
-// import Booz from "./components/Booz.js";
+import Booz from "./components/Booz.js";
 import NewBooz from "./components/NewBooz.js";
 
 let baseURL = process.env.REACT_APP_BASEURL;
 
 if (process.env.NODE_ENV === "development") {
-  baseURL = "http://localhost:3001";
+  baseURL = "http://localhost:3000";
 } else {
   baseURL = "https://fathomless-sierra-68956.herokuapp.com";
 }
-
-// console.log("current base URL:", baseURL);
 
 class App extends React.Component {
   constructor(props) {
@@ -43,7 +41,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>BOOZ HEADER</h1>
-        {/* <Booz /> */}
+        <Booz />
         <NewBooz handleNewBooz={this.handleNewBooz} />
       </div>
     );
