@@ -30,8 +30,6 @@ class Booz extends Component {
   }
   componentDidMount() {
     this.getModel();
-    // console.log("in Did mounbt", this.state.firstRow);
-    // this.getBooz(this.state.firstRow);
   }
 
   async handleEditButton(clickedBrewery) {
@@ -45,7 +43,7 @@ class Booz extends Component {
   async handleDeleteButton(id) {
     try {
       const url = `${baseURL}/booz/${id}`;
-      console.log("In delete url", url);
+      // console.log("In delete url", url);
       await axios.delete(url);
     } catch (err) {
       console.log("DELETE Error: ", err);
@@ -63,7 +61,6 @@ class Booz extends Component {
     const response = await axios.get(`${baseURL}`);
     const data = response.data;
 
-    // console.log("in getMOdel", data[0].details);
     let i = 0;
     for (i = 0; i < data.length; i++) {
       if (data[i].rating === 1) {
@@ -94,7 +91,6 @@ class Booz extends Component {
     }
 
     let firstRow1 = data[0];
-    console.log("in get model firstRow", firstRow1);
 
     this.setState({
       boozData: data,
@@ -117,7 +113,7 @@ class Booz extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="col-md">
+            <div className="col">
               <table>
                 <tbody>
                   {this.state.boozData.map(boozd => {
@@ -132,7 +128,7 @@ class Booz extends Component {
                             <img
                               src="/star.png"
                               alt="x"
-                              width="25"
+                              width="23"
                               height="18"
                             />
                           )}
@@ -140,7 +136,7 @@ class Booz extends Component {
                             <img
                               src="/star.png"
                               alt="x"
-                              width="25"
+                              width="23"
                               height="18"
                             />
                           )}
@@ -148,7 +144,7 @@ class Booz extends Component {
                             <img
                               src="/star.png"
                               alt="x"
-                              width="25"
+                              width="23"
                               height="18"
                             />
                           )}
@@ -156,7 +152,7 @@ class Booz extends Component {
                             <img
                               src="/star.png"
                               alt="x"
-                              width="25"
+                              width="23"
                               height="18"
                             />
                           )}
@@ -164,7 +160,7 @@ class Booz extends Component {
                             <img
                               src="/star.png"
                               alt="x"
-                              width="25"
+                              width="23"
                               height="18"
                             />
                           )}
@@ -188,7 +184,7 @@ class Booz extends Component {
                 </tbody>
               </table>
             </div>
-            <div className="col-md">
+            <div className="col">
               <section>{showEditForm}</section>
             </div>
           </div>
