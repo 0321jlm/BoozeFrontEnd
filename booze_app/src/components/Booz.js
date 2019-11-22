@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import CreateForm from "./CreateForm";
 import ShowBooz from "./ShowBooz";
+import UpdateBooz from "./UpdateBooz";
 import axios from "axios";
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
@@ -31,19 +32,17 @@ class Booz extends Component {
     // console.log("in did mount data boozData = ", this.state.boozData[0]);
   }
 
-  async handleEditButton(clickedBookmark) {
+  async handleEditButton(clickedBrewery) {
     console.log("Clicked Edit Button");
-    // await this.setState({
-    //   editButton: true,
-    //   selectedBookmark: clickedBookmark
-    // });
+    await this.setState({
+      editButton: true,
+      selectedBrewery: clickedBrewery
+    });
   }
 
   async handleDeleteButton(id) {
     try {
       const url = `${baseURL}/booz/${id}`;
-
-      // console.log("Clicked Delete Button url", url);
       await axios.delete(url);
     } catch (err) {
       console.log("DELETE Error: ", err);
@@ -63,7 +62,6 @@ class Booz extends Component {
 
     let i = 0;
     for (i = 0; i < data.length; i++) {
-      // console.log("data.rating", data[i].rating);
       if (data[i].rating === 1) {
         data[i].star1 = "X";
       }
@@ -99,11 +97,14 @@ class Booz extends Component {
   render() {
     // const { allBookmarks, getBookmarks } = this.props;
     // const { editButton, selectedBookmark } = this.state;
-    // const showEditForm = editButton ? (
-    //   <EditForm bookmark={selectedBookmark} getBookmarks={getBookmarks} />
-    // ) : (
-    //   <CreateForm getBookmarks={getBookmarks} />
-    // );
+    const showEditForm = this.state.editButton ? (
+      <UpdateBooz
+        booz={this.state.selectedBrewery}
+        booz2={this.state.boozComments}
+      />
+    ) : (
+      <ShowBooz booz={this.state.boozToShow} booz2={this.state.boozComments} />
+    );
     return (
       <main>
         <h1>Favorite Breweries</h1>
@@ -140,12 +141,16 @@ class Booz extends Component {
           </table>
         </section>
         <section>
-          {this.state.boozToShow && (
+          {/* {this.state.boozToShow && (
             <ShowBooz
               booz={this.state.boozToShow}
               booz2={this.state.boozComments}
             />
-          )}
+          )} */}
+          <UpdateBooz
+            booz={this.state.selectedBrewery}
+            // booz2={this.state.boozComments}
+          />
         </section>
         {/* <section>{showEditForm}</section> */}
       </main>
