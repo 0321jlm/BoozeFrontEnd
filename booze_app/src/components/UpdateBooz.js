@@ -21,9 +21,7 @@ class UpdateBooz extends Component {
     });
   }
 
-
   async handleChange(event) {
-
     const { name, value } = event.target;
     this.setState({
       [name]: value
@@ -31,7 +29,6 @@ class UpdateBooz extends Component {
   }
 
   async handleSubmit(event) {
-
     try {
       event.preventDefault();
       const boozID = this.props.booz._id;
@@ -43,7 +40,7 @@ class UpdateBooz extends Component {
       console.log("in handle submit", url, "Payload", payload);
 
       const updatedBooz = await axios.put(url, payload);
-      this.props.getModal();
+      this.props.getModel();
       this.setState({
         rating: {},
         comments: ""
@@ -51,7 +48,6 @@ class UpdateBooz extends Component {
     } catch (err) {
       console.log("Update Submit Error: ", err);
     }
-
   }
 
   render() {
@@ -60,26 +56,22 @@ class UpdateBooz extends Component {
         <h1>Update Info</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <label htmlFor="rating">Rating:</label>
+            <label htmlFor="rating">Rating: </label>
             <input
               type="number"
               name="rating"
-
               onChange={this.handleChange}
-
               value={this.state.rating}
-
-
             />
-            <label htmlFor="comments">Comments:</label>
+            <br />
+            <label htmlFor="comments">Comments: </label>
             <input
               type="text"
               name="comments"
               onChange={this.handleChange}
-
               value={this.state.comments}
-
-            />
+            />{" "}
+            <br />
             <input type="submit" value="Update Booz" />
           </div>
         </form>

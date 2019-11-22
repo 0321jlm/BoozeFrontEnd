@@ -13,8 +13,8 @@ class ShowBooz extends React.Component {
         <h6>Zip: {this.props.booz.postal_code}</h6>
         <h6>Phone {this.props.booz.phone}</h6>
         <h6>
-          Website:{" "}
-          <a href="{this.props.booz.website_url}" target="_blank">
+          Website:
+          <a href={this.props.booz.website_url} target="_blank">
             {this.props.booz.website_url}
           </a>
         </h6>
