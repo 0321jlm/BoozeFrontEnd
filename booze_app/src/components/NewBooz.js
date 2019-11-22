@@ -50,7 +50,7 @@ class NewBooz extends React.Component {
                 <tr key={aBooz.id}>
                   <td>{aBooz.name}</td>
                   <td>{aBooz.website_url}</td>
-                  <td onClick={() => this.props.handleNewBooz(aBooz)}>X</td>
+                  <td onClick={() => this.props.handleNewBooz(aBooz)}>x</td>
                 </tr>
               );
             })}
