@@ -143,9 +143,9 @@ class Booz extends Component {
         <div className="container">
           <div
             className="row"
-            style={{
-              backgroundColor: "white"
-            }}
+            // style={{
+            //   backgroundColor: "white"
+            // }}
           >
             <div className="col">
               <table>

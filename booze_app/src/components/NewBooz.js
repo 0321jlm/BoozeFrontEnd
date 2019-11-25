@@ -55,44 +55,47 @@ class NewBooz extends React.Component {
 
   render() {
     return (
-      <div id="newBoozRow">
-        <form onSubmit={this.callApi}>
-          <label htmlFor="stateCode">Search by State: </label>
-          <input
-            type="text"
-            name="stateCode"
-            value={this.state.stateCode}
-            onChange={this.handleRequest}
-            style={{ width: "100px" }}
-          />
-          <Button
-            variant="outline-primary"
-            size="sm"
-            type="submit"
-            // onClick={() => {
-            //   this.callApi();
-            // }}
-          >
-            Get Booz:
-          </Button>
-        </form>
+      <div>
+        <div>
+          <form onSubmit={this.callApi}>
+            <label htmlFor="stateCode">Search by State: </label>
+            <input
+              type="text"
+              name="stateCode"
+              value={this.state.stateCode}
+              onChange={this.handleRequest}
+              style={{ width: "100px" }}
+            />
+            <Button
+              variant="outline-primary"
+              size="sm"
+              type="submit"
+              // onClick={() => {
+              //   this.callApi();
+              // }}
+            >
+              SEARCH
+            </Button>
+          </form>
+        </div>
 
-
-        <table>
-          <tbody>
-            {this.state.booz.map(aBooz => {
-              return (
-                <tr key={aBooz.id}>
-                  <td>{aBooz.name}</td>
-                  <td>{aBooz.website_url}</td>
-                  <td onClick={() => this.props.handleNewBooz(aBooz)}>
-                    <img src="/Add-icon.png" alt="x" width="23" height="18" />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div id="newBoozRow">
+          <table>
+            <tbody>
+              {this.state.booz.map(aBooz => {
+                return (
+                  <tr key={aBooz.id}>
+                    <td>{aBooz.name}</td>
+                    <td>{aBooz.website_url}</td>
+                    <td onClick={() => this.props.handleNewBooz(aBooz)}>
+                      <img src="/Add-icon.png" alt="x" width="23" height="18" />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
