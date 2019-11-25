@@ -32,7 +32,7 @@ class UpdateBooz extends Component {
     try {
       event.preventDefault();
       const boozID = this.props.booz._id;
-      const url = `http://localhost:3000/booz/${boozID}`;
+      const url = `http://localhost:3003/booz/${boozID}`;
       const payload = {
         rating: this.state.rating,
         comments: this.state.comments
