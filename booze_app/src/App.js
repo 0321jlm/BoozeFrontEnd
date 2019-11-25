@@ -51,7 +51,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>BOOZ HEADER</h1>
         <Booz />
         {/* <NewBooz handleNewBooz={this.handleNewBooz} /> */}
       </div>

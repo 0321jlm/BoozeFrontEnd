@@ -6,9 +6,9 @@ Functionality includes full CRUD with a show, create new favorites, update and d
 
 ### Developers
 
+JoAnn Briggs
 Fred Kaesmann
 Jess Madeux
-JoAnn Briggs
 
 ## URL to site
 
