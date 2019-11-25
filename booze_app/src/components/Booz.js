@@ -227,7 +227,7 @@ class Booz extends Component {
               <section>{showEditForm}</section>
             </div>
           </div>
-          <div className="row">
+          <div className="row" id="newBoozRow">
             <NewBooz
               handleNewBooz={this.handleNewBooz}
               getModel={this.getModel}

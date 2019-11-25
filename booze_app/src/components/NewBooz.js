@@ -34,7 +34,7 @@ class NewBooz extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="newBoozRow">
         <button
           className="get"
           onClick={() => {
