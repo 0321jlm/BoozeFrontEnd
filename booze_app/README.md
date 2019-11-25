@@ -75,9 +75,12 @@ echo DBQuery.prototype.\_prettyShell = true >> ~/.mongorc.js
 ## Main problems
 
 ```
-1. Difficulties in keeping the ports in sync, as Express defalts to 3000
+1. Difficulties in keeping the ports in sync, as Express defaults to 3000
 2. Passing state up to the top .js file
 3. Difficulties in styling React tags
+4. git was tough keeping in sync
+5. Changing the model after we seeded
+6. Fred!
 ```
 
 ## Credits
