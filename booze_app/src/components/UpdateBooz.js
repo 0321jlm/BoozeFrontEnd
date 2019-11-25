@@ -15,7 +15,6 @@ class UpdateBooz extends Component {
 
   componentDidMount() {
     console.log("mounted", this.props);
-
     this.setState({
       rating: this.props.booz.rating,
       comments: this.props.booz.comments
