@@ -202,16 +202,17 @@ class Booz extends Component {
 
                         <td>
                           <Button
-                            variant="outline-primary"
+                            variant="primary"
                             size="sm"
                             onClick={() => this.handleEditButton(boozd)}
                           >
                             Edit
                           </Button>
                         </td>
+                        <td width="10px"></td>
                         <td>
                           <Button
-                            variant="outline-danger"
+                            variant="danger"
                             size="sm"
                             onClick={() => this.handleDeleteButton(boozd._id)}
                           >
