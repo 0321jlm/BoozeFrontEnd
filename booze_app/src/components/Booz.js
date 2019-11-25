@@ -3,6 +3,7 @@ import ShowBooz from "./ShowBooz";
 import UpdateBooz from "./UpdateBooz";
 import NewBooz from "./NewBooz.js";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
 let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
   baseURL = "http://localhost:3003";
@@ -27,6 +28,7 @@ class Booz extends Component {
     this.handleEditButton = this.handleEditButton.bind(this);
     this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.getBooz = this.getBooz.bind(this);
+    this.handleNewBooz = this.handleNewBooz.bind(this);
   }
   componentDidMount() {
     this.getModel();
@@ -47,6 +49,7 @@ class Booz extends Component {
     } catch (err) {
       console.log("DELETE Error: ", err);
     }
+    this.getModel();
   }
 
   async getBooz(boozobj) {
@@ -58,7 +61,13 @@ class Booz extends Component {
 
   async getModel(bookmarkID) {
     const response = await axios.get(`${baseURL}`);
-    console.log("data", response.data);
+    // const response = await axios.get(`${baseURL}`, {
+    //   params: {
+    //     orderby: { rating: -1 }
+    //   }
+    // });
+
+    // console.log("data", response.data);
     const data = response.data;
 
     let i = 0;
@@ -100,6 +109,25 @@ class Booz extends Component {
     this.getBooz(firstRow1);
   }
 
+  async handleNewBooz(aBooz) {
+    console.log("new", aBooz);
+    const addBooz = {
+      rating: "",
+      comments: "",
+      details: aBooz
+    };
+
+    console.log("handle new booz entered: ", addBooz);
+    // event.preventDefault();
+    console.log("baseURL: ", baseURL);
+    const response = await axios.post(`${baseURL}/booz`, addBooz);
+    this.setState({
+      details: aBooz,
+      rating: "",
+      comments: ""
+    });
+    // console.log("this state: ", this.state);
+  }
   render() {
     const { baseURL } = this.props;
     const showEditForm = this.state.editButton ? (
@@ -112,7 +140,12 @@ class Booz extends Component {
         <h1>Favorite Breweries</h1>
 
         <div className="container">
-          <div className="row">
+          <div
+            className="row"
+            style={{
+              backgroundColor: "white"
+            }}
+          >
             <div className="col">
               <table>
                 <tbody>
@@ -123,7 +156,7 @@ class Booz extends Component {
                         onMouseOver={() => this.getBooz(boozd)}
                       >
                         <td>{boozd.details.name}</td>
-                        <td align="left">
+                        <td align="left" className="text-nowrap">
                           {boozd.star1 === "X" && (
                             <img
                               src="/star.png"
@@ -167,16 +200,22 @@ class Booz extends Component {
                         </td>
 
                         <td>
-                          <button onClick={() => this.handleEditButton(boozd)}>
+                          <Button
+                            variant="outline-primary"
+                            size="sm"
+                            onClick={() => this.handleEditButton(boozd)}
+                          >
                             Edit
-                          </button>
+                          </Button>
                         </td>
                         <td>
-                          <button
+                          <Button
+                            variant="outline-danger"
+                            size="sm"
                             onClick={() => this.handleDeleteButton(boozd._id)}
                           >
                             Delete
-                          </button>
+                          </Button>
                         </td>
                       </tr>
                     );
@@ -189,7 +228,10 @@ class Booz extends Component {
             </div>
           </div>
           <div className="row">
-            <NewBooz handleNewBooz={this.handleNewBooz} />
+            <NewBooz
+              handleNewBooz={this.handleNewBooz}
+              getModel={this.getModel}
+            />
           </div>
         </div>
       </main>
