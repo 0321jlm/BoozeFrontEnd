@@ -72,7 +72,7 @@ class UpdateBooz extends Component {
               onChange={this.handleChange}
               value={this.state.comments}
               style={{ width: "400px" }}
-            />{" "}
+            />
             <br />
             <Button variant="outline-primary" size="sm" type="submit">
               Update Booz
