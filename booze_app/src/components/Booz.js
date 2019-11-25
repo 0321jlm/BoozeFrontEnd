@@ -121,6 +121,8 @@ class Booz extends Component {
     // event.preventDefault();
     console.log("baseURL: ", baseURL);
     const response = await axios.post(`${baseURL}/booz`, addBooz);
+    this.getModel();
+
     this.setState({
       details: aBooz,
       rating: "",
