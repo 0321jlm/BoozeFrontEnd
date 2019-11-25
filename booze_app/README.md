@@ -78,6 +78,8 @@ echo DBQuery.prototype.\_prettyShell = true >> ~/.mongorc.js
 1. Difficulties in keeping the ports in sync, as Express defalts to 3000
 2. Passing state up to the top .js file
 3. Difficulties in styling React tags
+4. git was difficult to keep in sync
+5. Fred!
 ```
 
 ## Credits
