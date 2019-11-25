@@ -77,6 +77,7 @@ class NewBooz extends React.Component {
           </Button>
         </form>
 
+
         <table>
           <tbody>
             {this.state.booz.map(aBooz => {
