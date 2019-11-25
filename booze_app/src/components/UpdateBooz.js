@@ -17,7 +17,8 @@ class UpdateBooz extends Component {
     console.log("mounted", this.props);
     this.setState({
       rating: this.props.booz.rating,
-      comments: this.props.booz.comments
+      comments: this.props.booz.comments,
+      name: this.props.booz.details.name
     });
   }
 
@@ -53,7 +54,7 @@ class UpdateBooz extends Component {
   render() {
     return (
       <div>
-        <h1>Update Info</h1>
+        <h2>{this.state.name}</h2>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="rating">Rating: </label>
@@ -72,7 +73,7 @@ class UpdateBooz extends Component {
               onChange={this.handleChange}
               value={this.state.comments}
               style={{ width: "400px" }}
-            />{" "}
+            />
             <br />
             <Button variant="outline-primary" size="sm" type="submit">
               Update Booz
