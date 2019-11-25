@@ -33,7 +33,7 @@ class UpdateBooz extends Component {
     try {
       event.preventDefault();
       const boozID = this.props.booz._id;
-      const url = `http://localhost:3000/booz/${boozID}`;
+      const url = `http://localhost:3003/booz/${boozID}`;
       const payload = {
         rating: this.state.rating,
         comments: this.state.comments
@@ -63,6 +63,7 @@ class UpdateBooz extends Component {
               name="rating"
               onChange={this.handleChange}
               value={this.state.rating}
+              style={{ width: "30px" }}
             />
             <br />
             <label htmlFor="comments">Comments: </label>
@@ -71,6 +72,7 @@ class UpdateBooz extends Component {
               name="comments"
               onChange={this.handleChange}
               value={this.state.comments}
+              style={{ width: "400px" }}
             />{" "}
             <br />
             <Button variant="outline-primary" size="sm" type="submit">
