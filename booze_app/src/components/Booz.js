@@ -8,7 +8,7 @@ let baseURL = process.env.REACT_APP_BASEURL;
 if (process.env.NODE_ENV === "development") {
   baseURL = "http://localhost:3003";
 } else {
-  baseURL = "https://booz-api.herokuapp.com/";
+  baseURL = "https://booz-api.herokuapp.com";
 }
 
 class Booz extends Component {
