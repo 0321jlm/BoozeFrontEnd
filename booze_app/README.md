@@ -1,6 +1,6 @@
 # Project 3 - Favorite Breweries
 
-Called "Favorite Breweries", is an application that tracks your favorite breweries per state. The app allows a user to search for local breweries, save them as a favorite and add ratings and comments
+Called "Favorite Breweries", is an application that tracks your favorite breweries. The app allows a user to search for local breweries, save them as a favorite and add ratings and comments
 
 Functionality includes full CRUD with a show, create new favorites, update and delete.
 
@@ -21,10 +21,10 @@ xxx
 ## Features
 
 ```
-1. Home page encourages users to create an account
-2. Ability to create a new user account
-3. Ability to create new stock holding, edit them, and delete them
-4. Main feature is to protect the home page with a session key
+1. Home page encourages users to search for a brewery
+2. Create a favorite
+3. Rate the brewery and provide comments
+4. Delete those not liked
 
 ```
 
@@ -69,12 +69,6 @@ echo DBQuery.prototype.\_prettyShell = true >> ~/.mongorc.js
 * Reading reading third-part API (https://api.openbrewerydb.org/breweries?by_state=connecticut) to pull in breweries by state
 * Storing rating, comments and object returned from API into Mongo DB
 * CRUD funtionality
-    const { baseURL } = this.props;
-    const showEditForm = this.state.editButton ? (
-      <UpdateBooz booz={this.state.selectedBrewery} getModel={this.getModel} />
-    ) : (
-      <ShowBooz booz={this.state.boozToShow} booz2={this.state.boozComments} />
-    );
 
 ```
 
