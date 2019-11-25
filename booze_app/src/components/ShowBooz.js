@@ -4,7 +4,6 @@ class ShowBooz extends React.Component {
   render() {
     return (
       <div>
-        <h3>Brewery Info</h3>
         <h4>{this.props.booz.name}</h4>
         <h6>Type: {this.props.booz.brewery_type}</h6>
         <h6>Street: {this.props.booz.street}</h6>
