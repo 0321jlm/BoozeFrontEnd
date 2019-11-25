@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
 
 class UpdateBooz extends Component {
   constructor() {
@@ -74,7 +75,9 @@ class UpdateBooz extends Component {
               style={{ width: "400px" }}
             />{" "}
             <br />
-            <input type="submit" value="Update Booz" />
+            <Button variant="outline-primary" size="sm" type="submit">
+              Update Booz
+            </Button>
           </div>
         </form>
       </div>
