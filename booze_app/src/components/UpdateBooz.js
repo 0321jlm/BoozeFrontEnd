@@ -62,6 +62,7 @@ class UpdateBooz extends Component {
               name="rating"
               onChange={this.handleChange}
               value={this.state.rating}
+              style={{ width: "30px" }}
             />
             <br />
             <label htmlFor="comments">Comments: </label>
@@ -70,6 +71,7 @@ class UpdateBooz extends Component {
               name="comments"
               onChange={this.handleChange}
               value={this.state.comments}
+              style={{ width: "400px" }}
             />{" "}
             <br />
             <input type="submit" value="Update Booz" />
