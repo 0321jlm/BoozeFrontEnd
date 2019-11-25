@@ -67,7 +67,7 @@ class Booz extends Component {
     //   }
     // });
 
-    // console.log("data", response.data);
+    console.log("data", response.data);
     const data = response.data;
 
     let i = 0;
@@ -99,13 +99,12 @@ class Booz extends Component {
       }
     }
 
-    let firstRow1 = data[0];
-
     this.setState({
-      boozData: data,
+      boozData: data.reverse(),
       editButton: false
     });
 
+    let firstRow1 = data[0];
     this.getBooz(firstRow1);
   }
 
