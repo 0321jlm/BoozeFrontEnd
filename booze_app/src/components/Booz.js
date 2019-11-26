@@ -69,7 +69,7 @@ class Booz extends Component {
     //   }
     // });
 
-    console.log("data", response.data);
+    // console.log("data", response.data);
     const data = response.data;
 
     let i = 0;
@@ -111,16 +111,16 @@ class Booz extends Component {
   }
 
   async handleNewBooz(aBooz) {
-    console.log("new", aBooz);
+    // console.log("new", aBooz);
     const addBooz = {
       rating: "",
       comments: "",
       details: aBooz
     };
 
-    console.log("handle new booz entered: ", addBooz);
+    // console.log("handle new booz entered: ", addBooz);
     // event.preventDefault();
-    console.log("baseURL: ", baseURL);
+    // console.log("baseURL: ", baseURL);
     const response = await axios.post(`${baseURL}/booz`, addBooz);
     this.getModel();
 
@@ -129,7 +129,6 @@ class Booz extends Component {
       rating: "",
       comments: ""
     });
-    // console.log("this state: ", this.state);
   }
   render() {
     const { baseURL } = this.props;
@@ -143,12 +142,7 @@ class Booz extends Component {
         <h1>Favorite Breweries</h1>
 
         <div className="container">
-          <div
-            className="row"
-            // style={{
-            //   backgroundColor: "white"
-            // }}
-          >
+          <div className="row">
             <div className="col">
               <table>
                 <tbody>
