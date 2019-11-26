@@ -62,12 +62,15 @@ class Booz extends Component {
   }
 
   async getModel(bookmarkID) {
-    const response = await axios.get(`${baseURL}`);
-    // const response = await axios.get(`${baseURL}`, {
-    //   params: {
-    //     orderby: { rating: -1 }
-    //   }
-    // });
+    const response = await axios({
+      method: "GET",
+      url: `${baseURL}`,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      mode: "cors"
+    });
 
     console.log("data", response.data);
     const data = response.data;
@@ -143,12 +146,7 @@ class Booz extends Component {
         <h1>Favorite Breweries</h1>
 
         <div className="container">
-          <div
-            className="row"
-            // style={{
-            //   backgroundColor: "white"
-            // }}
-          >
+          <div className="row">
             <div className="col">
               <table>
                 <tbody>
