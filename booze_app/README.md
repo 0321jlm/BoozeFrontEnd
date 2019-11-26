@@ -1,4 +1,4 @@
-# Project 3 - Favorite Breweries
+    # Project 3 - Favorite Breweries
 
 Called "Favorite Breweries", is an application that tracks your favorite breweries. The app allows a user to search for local breweries, save them as a favorite and add ratings and comments
 
@@ -12,7 +12,7 @@ Jess Madeux
 
 ## URL to site
 
-xxx
+https://booz-app.surge.sh/
 
 ## Screen Shot
 
@@ -25,6 +25,29 @@ xxx
 2. Create a favorite
 3. Rate the brewery and provide comments
 4. Delete those not liked
+
+```
+
+## Deployment
+
+### Heroku
+
+```
+1. git add -A
+2. git commit -m 'comments'
+3. git push origin devBranch
+4. git push heroku master
+5. heroku restart
+
+```
+
+### Surge
+
+```
+1. Go into serge folder
+2. gnpm run build
+3. cd build
+4. surge
 
 ```
 
