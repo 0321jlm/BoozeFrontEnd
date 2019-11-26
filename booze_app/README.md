@@ -16,7 +16,7 @@ https://booz-app.surge.sh/
 
 ## Screen Shot
 
-![](https://user-images.githubusercontent.com/35512164/69552265-292e3480-0f6c-11ea-9e3f-3434a12d2c99.png)
+![](https://user-images.githubusercontent.com/35512164/69642881-7247bc80-1030-11ea-8560-c239c6ea2433.png)
 
 ## Features
 
